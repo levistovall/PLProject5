@@ -1,6 +1,8 @@
 package stovall;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -36,8 +38,34 @@ public class ListComprehension {
         emp.add(e9); emp.add(e10); emp.add(e11); emp.add(e12); emp.add(e13); emp.add(e14); emp.add(e15); emp.add(e16);
         emp.add(e17); emp.add(e18); emp.add(e19); emp.add(e20); emp.add(e21); emp.add(e22); emp.add(e23); emp.add(e24);
         emp.add(e25); emp.add(e26);
+
+
+        // select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name;
         emp.stream()
-                .filter(e -> {return e.get(7) >= 1000;})
-                .forEach(e -> { System.out.println(e); });
+                .filter(e -> e.get(7).hashCode() > 1500 && e.get(9).hashCode() > 40)
+                .sorted((a, b) -> a.get(1).toString().compareTo(b.get(1).toString()))
+                .forEach(e -> { System.out.println(e.get(1) + " " + e.get(2) + " " + e.get(6) + " " + e.get(7)); });
+
+        System.out.println("");
+
+        // select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by salary desc;
+        emp.stream()
+                .filter(e -> e.get(7).hashCode() > 1500 && e.get(9).hashCode() > 40)
+                .sorted((a, b) -> b.get(7).hashCode() - a.get(7).hashCode())
+                .forEach(e -> { System.out.println(e.get(1) + " " + e.get(2) + " " + e.get(6) + " " + e.get(7)); });
+
+        System.out.println("");
+
+        // select dept_id, avg(salary) from s_emp group by dept_id order by dept_id;
+        Map<Integer, Double> avgSalMap = emp.stream()
+                .filter(e -> e.get(9).toString().matches("[0-9]*"))
+                .collect(Collectors.groupingBy(e -> e.get(9).hashCode(), Collectors.averagingInt(e -> e.get(7).hashCode())));
+
+        avgSalMap.entrySet().stream()
+                .sorted((a, b) -> a.getKey() - b.getKey())
+                .forEach(e -> { System.out.println(e.getKey() + ": " + e.getValue()); });
+
+
+        System.out.println("");
     }
 }
