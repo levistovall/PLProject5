@@ -34,38 +34,72 @@ public class ListComprehension {
         List<Object> e25 = Arrays.asList(8, "Burns", "Ben", "burnsba", "04-07-1990 00:00:00", "", "Warehouse Manager", 1500, "", 43, 2);
         List<Object> e26 = Arrays.asList(9, "Catskill", "Antoinette", "catskiaw", "02-09-1992 00:00:00", "", "Warehouse Manager", 1700, "", 44, 2);
 
-        emp.add(e1); emp.add(e2); emp.add(e3); emp.add(e4); emp.add(e5); emp.add(e6); emp.add(e7); emp.add(e8);
+        //emp.add(e1);
+        emp.add(e2); emp.add(e3); emp.add(e4); emp.add(e5); emp.add(e6); emp.add(e7); emp.add(e8);
         emp.add(e9); emp.add(e10); emp.add(e11); emp.add(e12); emp.add(e13); emp.add(e14); emp.add(e15); emp.add(e16);
         emp.add(e17); emp.add(e18); emp.add(e19); emp.add(e20); emp.add(e21); emp.add(e22); emp.add(e23); emp.add(e24);
         emp.add(e25); emp.add(e26);
 
 
-        // select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name;
+        System.out.println("select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by last_name;");
+        System.out.println("");
         emp.stream()
-                .filter(e -> e.get(7).hashCode() > 1500 && e.get(9).hashCode() > 40)
+                .filter(e -> (Integer)e.get(7) > 1500 && (Integer)e.get(9) > 40)
                 .sorted((a, b) -> a.get(1).toString().compareTo(b.get(1).toString()))
-                .forEach(e -> { System.out.println(e.get(1) + " " + e.get(2) + " " + e.get(6) + " " + e.get(7)); });
+                .map(e -> Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7)))
+                .forEach(e -> { System.out.println(e); });
 
         System.out.println("");
+        System.out.println("");
 
-        // select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by salary desc;
+
+        System.out.println("select last_name, first_name, title, salary from s_emp where salary > 1500 and dept_id > 40 order by salary desc;");
+        System.out.println("");
         emp.stream()
-                .filter(e -> e.get(7).hashCode() > 1500 && e.get(9).hashCode() > 40)
-                .sorted((a, b) -> b.get(7).hashCode() - a.get(7).hashCode())
-                .forEach(e -> { System.out.println(e.get(1) + " " + e.get(2) + " " + e.get(6) + " " + e.get(7)); });
+                .filter(e -> (Integer)e.get(7) > 1500 && (Integer)e.get(9) > 40)
+                .sorted((a, b) -> (Integer)b.get(7) - (Integer)a.get(7))
+                .map(e -> Arrays.asList(e.get(1), e.get(2), e.get(6), e.get(7)))
+                .forEach(e -> { System.out.println(e); });
 
         System.out.println("");
+        System.out.println("");
 
-        // select dept_id, avg(salary) from s_emp group by dept_id order by dept_id;
+        System.out.println("select dept_id, avg(salary) from s_emp group by dept_id order by dept_id;");
+        System.out.println("");
         Map<Integer, Double> avgSalMap = emp.stream()
                 .filter(e -> e.get(9).toString().matches("[0-9]*"))
-                .collect(Collectors.groupingBy(e -> e.get(9).hashCode(), Collectors.averagingInt(e -> e.get(7).hashCode())));
+                .collect(Collectors.groupingBy(e -> (Integer)e.get(9), Collectors.averagingInt(e -> (Integer)e.get(7))));
 
         avgSalMap.entrySet().stream()
                 .sorted((a, b) -> a.getKey() - b.getKey())
-                .forEach(e -> { System.out.println(e.getKey() + ": " + e.getValue()); });
-
-
+                .map(e -> Arrays.asList(e.getKey(), e.getValue()))
+                .forEach(e -> { System.out.println(e); });
         System.out.println("");
+        System.out.println("");
+
+        System.out.println("select dept_id, avg(salary) from s_emp group by dept_id having avg(salary) < 1500;");
+        System.out.println("");
+        Map<Integer, Double> avgSalMap1 = emp.stream()
+                .filter(e -> e.get(9).toString().matches("[0-9]*"))
+                .collect(Collectors.groupingBy(e -> (Integer)e.get(9), Collectors.averagingInt(e -> (Integer)e.get(7))));
+
+        avgSalMap1.entrySet().stream()
+                .sorted((a, b) -> a.getKey() - b.getKey())
+                .map(e -> Arrays.asList(e.getKey(), e.getValue()))
+                .filter(e -> (Double)e.get(1) < 1500.0)
+                .forEach(e -> { System.out.println(e); });
+        System.out.println("");
+        System.out.println("");
+
+
+        System.out.println("select title, avg(salary) from s_emp group by title order by avg(salary) desc;");
+        System.out.println("");
+        Map<String, Double> avgSalMap2 = emp.stream()
+                .collect(Collectors.groupingBy(e -> ((String)e.get(6)).toUpperCase(), Collectors.averagingInt(e -> (Integer)e.get(7))));
+
+        avgSalMap2.entrySet().stream()
+                .sorted((a, b) -> b.getValue().intValue() - a.getValue().intValue())
+                .map(e -> Arrays.asList(e.getKey(), e.getValue()))
+                .forEach(e -> { System.out.println(e); });
     }
 }
