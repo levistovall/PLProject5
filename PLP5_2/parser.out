@@ -1,0 +1,160 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start
+Rule 1     start -> HTMLTAGS
+Rule 2     start -> BODYTAGS
+Rule 3     start -> HEADTAGS
+Rule 4     start -> PARATAGS
+Rule 5     start -> TITLE
+Rule 6     start -> HEADING1
+Rule 7     start -> SITES
+Rule 8     start -> BREAKS
+Rule 9     start -> phone
+Rule 10    start -> name
+Rule 11    phone -> PHONE
+Rule 12    name -> HEADING3
+
+Terminals, with rules where they appear
+
+BODYTAGS             : 2
+BREAKS               : 8
+HEADING1             : 6
+HEADING3             : 12
+HEADTAGS             : 3
+HTMLTAGS             : 1
+PARATAGS             : 4
+PHONE                : 11
+SITES                : 7
+TITLE                : 5
+error                : 
+
+Nonterminals, with rules where they appear
+
+name                 : 10
+phone                : 9
+start                : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start
+    (1) start -> . HTMLTAGS
+    (2) start -> . BODYTAGS
+    (3) start -> . HEADTAGS
+    (4) start -> . PARATAGS
+    (5) start -> . TITLE
+    (6) start -> . HEADING1
+    (7) start -> . SITES
+    (8) start -> . BREAKS
+    (9) start -> . phone
+    (10) start -> . name
+    (11) phone -> . PHONE
+    (12) name -> . HEADING3
+
+    HTMLTAGS        shift and go to state 3
+    BODYTAGS        shift and go to state 9
+    HEADTAGS        shift and go to state 10
+    PARATAGS        shift and go to state 8
+    TITLE           shift and go to state 2
+    HEADING1        shift and go to state 7
+    SITES           shift and go to state 11
+    BREAKS          shift and go to state 4
+    PHONE           shift and go to state 1
+    HEADING3        shift and go to state 12
+
+    name                           shift and go to state 5
+    phone                          shift and go to state 6
+    start                          shift and go to state 13
+
+state 1
+
+    (11) phone -> PHONE .
+
+    $end            reduce using rule 11 (phone -> PHONE .)
+
+
+state 2
+
+    (5) start -> TITLE .
+
+    $end            reduce using rule 5 (start -> TITLE .)
+
+
+state 3
+
+    (1) start -> HTMLTAGS .
+
+    $end            reduce using rule 1 (start -> HTMLTAGS .)
+
+
+state 4
+
+    (8) start -> BREAKS .
+
+    $end            reduce using rule 8 (start -> BREAKS .)
+
+
+state 5
+
+    (10) start -> name .
+
+    $end            reduce using rule 10 (start -> name .)
+
+
+state 6
+
+    (9) start -> phone .
+
+    $end            reduce using rule 9 (start -> phone .)
+
+
+state 7
+
+    (6) start -> HEADING1 .
+
+    $end            reduce using rule 6 (start -> HEADING1 .)
+
+
+state 8
+
+    (4) start -> PARATAGS .
+
+    $end            reduce using rule 4 (start -> PARATAGS .)
+
+
+state 9
+
+    (2) start -> BODYTAGS .
+
+    $end            reduce using rule 2 (start -> BODYTAGS .)
+
+
+state 10
+
+    (3) start -> HEADTAGS .
+
+    $end            reduce using rule 3 (start -> HEADTAGS .)
+
+
+state 11
+
+    (7) start -> SITES .
+
+    $end            reduce using rule 7 (start -> SITES .)
+
+
+state 12
+
+    (12) name -> HEADING3 .
+
+    $end            reduce using rule 12 (name -> HEADING3 .)
+
+
+state 13
+
+    (0) S' -> start .
+
+

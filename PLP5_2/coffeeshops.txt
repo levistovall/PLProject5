@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Austin Coffee Shops</title>
+</head>
+<body>
+<h1>Top 5 Coffee Shops in Austin, Texas</h1>
+<h3>Patika</h3>
+<p>
+<a href="http://www.patikacoffee.com">Website</a>
+<br>
+512-535-3955
+</p>
+<h3>Houndstooth</h3>
+<p>
+<a href="http://www.houndstoothcoffee.com/">Website</a>
+<br>
+512-531-9417
+</p>
+<h3>Cafe Medicci</h3>
+<p>
+<a href="http://caffemedici.com/">Website</a>
+<br>
+512-524-5049
+</p>
+<h3>Seventh Flag</h3>
+<p>
+<a href="http://seventhflagcoffee.com/">Website</a>
+<br>
+512-596-4477
+</p>
+<h3>Summermoon</h3>
+<p>
+<a href="http://woodfiredcoffee.com/">Website</a>
+<br>
+512-804-1665
+</p>
+</body>
+</html>
